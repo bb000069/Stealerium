@@ -1,4 +1,4 @@
-name: Build Stealerium1
+name: Build Stealerium
 
 on:
   push:
@@ -41,12 +41,9 @@ jobs:
         id: tag
         run: echo "::set-output name=release_tag::Build_$(date +"%Y.%m.%d_%H-%M")"
         
-      # Upload Release Asset
-      - name: Upload Release Asset 📦
-        id: upload-release-asset 
-        uses: softprops/action-gh-release@v1
+      - uses: actions/checkout@v3
+      - name: Upload Release Asset
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.tag.outputs.release_tag }}
-          files: Stealerium.zip
+        run:
+          gh release upload ${{ steps.tag.outputs.release_tag }} Stealerium.zip
